@@ -1,0 +1,21 @@
+class Solution:
+    def maxSatisfied(self, customers: List[int], grumpy: List[int], minutes: int) -> int:
+        n=len(grumpy)
+        ws=0
+        we=minutes
+        ans=-1
+        l=customers[0:minutes]
+        summ=sum(l)
+        for i in range(minutes,n):
+            if grumpy[i]==0:
+                summ+=customers[i]
+        ans=max(ans,summ)
+        while we<n:
+            if grumpy[we]==1:
+                summ+=customers[we]
+            if grumpy[ws]==1:
+                summ-=customers[ws]
+            ans=max(ans,summ)
+            we+=1
+            ws+=1
+        return ans
